@@ -4,11 +4,21 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
   outputs = { self, nixpkgs, nixos-hardware }: rec {
+    # Overlay to ensure `man` is included in the system
+    nixpkgs.overlays = [
+      (self: super: {
+        environment.systemPackages = super.environment.systemPackages ++ [
+          super.pkgs.man
+        ];
+      })
+    ];
+
     images = {
       pi4 = self.nixosConfigurations.pi4.config.system.build.image;
     };
     packages.x86_64-linux.pi-image = images.pi4;
     packages.aarch64-linux.pi-image = images.pi4;
+
     nixosConfigurations = {
       pi4 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
@@ -21,4 +31,3 @@
     };
   };
 }
-
