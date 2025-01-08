@@ -3,6 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
+
   outputs = { self, nixpkgs, nixos-hardware }: rec {
     # Overlay to ensure `man` is included in the system
     nixpkgs.overlays = [
@@ -26,6 +27,11 @@
           nixos-hardware.nixosModules.raspberry-pi-4
           "${nixpkgs}/nixos/modules/profiles/minimal.nix"
           ./configuration.nix
+        ];
+
+        # Ensure `man` is available in the `nixos-rebuild` environment
+        environment.systemPackages = with nixpkgs.pkgs; [
+          man
         ];
       };
     };
