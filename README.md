@@ -14,7 +14,7 @@ flash to an SD Card and boot.
 
 After you've booted, you will be able to rebuild the nixosConfiguration on the
 Pi. For example, by running `nixos-rebuild --flake
-github:matthewcroughan/raspberrypi-nixos-example`
+github:soltros/pi4-nixos-server`
 
 Simply fork this repo and begin adding code to `./configuration.nix` and allow
 this basic configuration to become your own.
