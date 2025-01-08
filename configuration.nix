@@ -7,7 +7,6 @@
     ./docker-support.nix
     ./user-account.nix
     ./basic-server.nix
-    ./motd.nix
     ./swapfile.nix
     ./apps.nix
   ];
